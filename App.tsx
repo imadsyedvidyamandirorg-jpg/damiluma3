@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { SystemState } from './types';
-import { BootScreen } from './components/BootScreen';
-import { LoginScreen } from './components/LoginScreen';
-import { Desktop } from './components/Desktop';
+import BootScreen from "./BootScreen";
+import LoginScreen from "./LoginScreen";
+import Desktop from "./Desktop";
 
 const App: React.FC = () => {
   const [state, setState] = useState<SystemState>(SystemState.BOOT);
