@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Lock, AlertTriangle } from 'lucide-react';
-import { playAccessDenied, playAccessGranted } from '../utils/sound';
+
+// ❗ FIXED IMPORT — NOW USING ROOT FILE (NO FOLDERS)
+import { playAccessDenied, playAccessGranted } from "./sound";
 
 interface LoginScreenProps {
   onLogin: () => void;
@@ -12,6 +14,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
     if (pass === '123') {
       playAccessGranted();
       onLogin();
@@ -26,9 +29,15 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
   return (
     <div className={`h-screen w-screen bg-black flex items-center justify-center flex-col ${error ? 'animate-pulse bg-red-900/20' : ''}`}>
       <div className={`p-8 border-2 ${error ? 'border-red-500' : 'border-green-500'} rounded-lg w-96 bg-black shadow-[0_0_20px_rgba(0,255,0,0.3)]`}>
+        
         <div className="flex justify-center mb-6 text-green-500">
-          {error ? <AlertTriangle size={64} className="text-red-500 animate-bounce" /> : <Lock size={64} />}
+          {error ? (
+            <AlertTriangle size={64} className="text-red-500 animate-bounce" />
+          ) : (
+            <Lock size={64} />
+          )}
         </div>
+
         <h1 className={`text-3xl font-bold text-center mb-8 font-mono ${error ? 'text-red-500' : 'text-green-500'} text-neon`}>
           {error ? 'ACCESS DENIED' : 'DAMI LUMA LOCKED'}
         </h1>
@@ -42,6 +51,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
             placeholder="ENTER PASSWORD"
             autoFocus
           />
+
           <button 
             type="submit"
             className={`mt-4 py-2 px-4 ${error ? 'bg-red-900 hover:bg-red-800' : 'bg-green-900 hover:bg-green-800'} text-white font-mono rounded transition-colors uppercase`}
@@ -49,6 +59,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
             {error ? 'Retry' : 'Decrypt & Enter'}
           </button>
         </form>
+
         {error && (
           <div className="mt-4 text-red-500 text-center font-mono text-sm">
             INTRUSION DETECTED. IP LOGGED.
@@ -58,3 +69,4 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
     </div>
   );
 };
+
